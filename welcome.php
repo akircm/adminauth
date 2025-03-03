@@ -16,7 +16,7 @@ if (isset($_SESSION['user'])) {
     exit;
 }
 
-$query = "SELECT * FROM product_tbl where pt_type = 'phone' ";
+$query = "SELECT * FROM product_tbl";
 $stmt = $conn ->query($query);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -80,12 +80,18 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <h5 class="card-title"> <?php echo ($row['pt_name']); ?> </h5>
               <p class="card-text">Type: <?php echo ($row['pt_type']); ?></p>
               <p class="card-text text-primary fw-bold">Price: $<?php echo ($row['pt_price']); ?></p>
+
               <form action="order/create_order.php" method="POST" class="d-grid">
                 <label class="form-label">Quantity</label>
+
                 <input name="quantity" required type="number" min="1" class="form-control mb-2">
+
                 <input type="hidden" name="pt_id" value="<?php echo ($row['pt_id']); ?>">
+
                 <input type="hidden" name="user_id" value="<?php echo ($user['id']); ?>">
+
                 <button type="submit" class="btn order">Order Now</button>
+
               </form>
             </div>
           </div>
