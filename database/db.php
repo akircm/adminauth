@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost'; // Database host
-$dbname = 'app'; // Database name
+$dbname = 'ecommerce'; // Database name
 $username = 'root'; // Database username (usually root in local environments)
 $password = ''; // Database password (usually empty in local environments)
  
