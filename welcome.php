@@ -16,7 +16,7 @@ if (isset($_SESSION['user'])) {
     exit;
 }
 
-$query = "SELECT * FROM product_tbl";
+$query = "SELECT * FROM product_tbl where pt_type = 'phone' ";
 $stmt = $conn ->query($query);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
