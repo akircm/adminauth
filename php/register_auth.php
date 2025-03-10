@@ -2,14 +2,15 @@
 include('../database/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'];
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    $department = $_POST['department'];
-    $course = $_POST['course'];
-    $role = $_POST['role'];
+
+    // Validate and fetch input values
+    $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
+    $address = $_POST['address'] ?? '';
+    $number = $_POST['number'] ?? '';
+    $role = $_POST['role'] ?? 'user'; // Default role if not provided
 
 
     if ($password !== $confirm_password) {
@@ -27,19 +28,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    $stmt = $conn->prepare("INSERT INTO users (name, username, email, password, department, course, role) 
-                            VALUES (:name, :username, :email, :password, :department, :course, :role)");
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password, address, number, role) 
+                            VALUES (:username, :email, :password, :address, :number, :role)");
     $stmt->execute([
-        'name' => $name,
+
         'username' => $username,
         'email' => $email,
         'password' => $password,
-        'department' => $department,
-        'course' => $course,
+        'address' => $address,
+        'number' => $number,
         'role' => $role,
     ]);
 
-    header('Location: ../index.php?success=Registration successful! Please login.');
+    // Redirect to login page with success message
+    header('Location: ../index.php?success=' . urlencode("Registration successful! Please login."));
     exit;
 } else {
     header('Location: ../register.php');

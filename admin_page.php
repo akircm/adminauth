@@ -46,6 +46,8 @@ if (isset($_SESSION['user'])) {
     <a href="#">Manage User</a>
     <a href="products_page.php">Products</a>
     <a href="#">Analytics</a>
+    <a href="admin_orders.php">View All Orders</a>
+
   </div>
   
   </div>

@@ -16,16 +16,17 @@
     }
     ?>
     <form method="POST" action="php/register_auth.php">
-        <input type="text" name="name" class="input-field" placeholder="Full Name" required autocomplete="off"><br>
+        
         <input type="text" name="username" class="input-field" placeholder="Username" required autocomplete="off"><br>
         <input type="email" name="email" class="input-field" placeholder="Email" required autocomplete="off"><br>
         <input type="password" name="password" class="input-field" placeholder="Password" required autocomplete="off"><br>
         <input type="password" name="confirm_password" class="input-field" placeholder="Confirm Password" required autocomplete="off"><br>
-        <input type="text" name="department" class="input-field" placeholder="Department" required autocomplete="off"><br>
-        <input type="text" name="course" class="input-field" placeholder="Course" required autocomplete="off"><br>
-        <input type = "hidden" value= "user" name="role">
+        <input type="text" name="address" class="input-field" placeholder="Address" required autocomplete="off"><br>
+        <input type="text" name="number" class="input-field" placeholder="Phone Number" required autocomplete="off"><br>
+        <input type="hidden" name="role" value="user">
         <button type="submit" class="btn">Register</button>
     </form>
+
     <p style="text-align:center; margin-top:10px;">
         <a href="index.php" style="color: blue;">Back to Login</a>
     </p>

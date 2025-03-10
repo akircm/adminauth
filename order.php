@@ -13,7 +13,6 @@ if (isset($_SESSION['user'])) {
 }
  
  
- 
 // Fetch orders for the current user
 $query = "SELECT o.order_id, p.pt_name, o.quantity, o.order_date, p.pt_img, p.pt_type
           FROM order_tbl o
@@ -40,7 +39,6 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <a href="welcome.php">Home</a>
     <span class="username">Welcome, <?php echo $user['username']; ?>!</span>
     <a href="php/logout.php">Logout</a>
-    <a href="order.php">Orders</a>
   </div>
  
     <div class="container mt-5">
