@@ -8,13 +8,14 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     exit;
 }
 
-// Fetch all orders
-$query = "SELECT o.order_id, p.pt_name, o.quantity, o.order_date, p.pt_img, p.pt_type, u.username
+// Fetch all orders with user ID
+$query = "SELECT o.order_id, u.id AS user_id, u.username, p.pt_name, o.quantity, o.order_date, p.pt_type, p.pt_img
           FROM order_tbl o
+          JOIN users u ON o.id = u.id
           JOIN product_tbl p ON o.pt_id = p.pt_id
-          JOIN users u ON o.id = u.id";
-$stmt = $conn->prepare($query);
-$stmt->execute();
+          ORDER BY o.id ASC";
+
+$stmt = $conn->query($query);
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -41,24 +42,26 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <thead class="table-dark">
                 <tr>
                     <th>Order ID</th>
+                    <th>User ID</th> <!-- Added User ID column -->
+                    <th>Username</th>
                     <th>Product Name</th>
                     <th>Quantity</th>
                     <th>Order Date</th>
                     <th>Product Type</th>
                     <th>Image</th>
-                    <th>Username</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($orders as $order) : ?>
                     <tr>
-                        <td><?php echo ($order['order_id']); ?></td>
-                        <td><?php echo ($order['pt_name']); ?></td>
-                        <td><?php echo ($order['quantity']); ?></td>
-                        <td><?php echo ($order['order_date']); ?></td>
-                        <td><?php echo ($order['pt_type']); ?></td>
-                        <td><img src="product/product_img/<?php echo htmlspecialchars($order['pt_img']); ?>" alt="Product Image" class="img-fluid"></td>
+                        <td><?php echo htmlspecialchars($order['order_id']); ?></td>
+                        <td><?php echo htmlspecialchars($order['user_id']); ?></td> <!-- Displaying User ID -->
                         <td><?php echo htmlspecialchars($order['username']); ?></td>
+                        <td><?php echo htmlspecialchars($order['pt_name']); ?></td>
+                        <td><?php echo htmlspecialchars($order['quantity']); ?></td>
+                        <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+                        <td><?php echo htmlspecialchars($order['pt_type']); ?></td>
+                        <td><img src="product/product_img/<?php echo htmlspecialchars($order['pt_img']); ?>" alt="Product Image" class="img-fluid" style="width: 50px; height: 50px; object-fit: cover;"></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
         $pt_id = $_POST['pt_id'];
         $id = $_POST['user_id'];
-        $quantity = $_POST['quantity'];
+        $quantity = intval($_POST['quantity']);  // Ensure it's an integer
         $order_date = date("Y-m-d"); // Use proper date format for SQL
  
        
