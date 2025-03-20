@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['add_to_cart'])) {
-        // 🛒 Add to Cart Logic
+        // Add to Cart Logic
         $check_cart = $conn->prepare("SELECT id, quantity FROM cart WHERE user_id = ? AND product_id = ?");
         $check_cart->execute([$user_id, $product_id]);
         $cart_item = $check_cart->fetch();
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // No redirect or alert, just process the request
     } 
     elseif (isset($_POST['order_now'])) {
-        // 📦 Order Now Logic
+        // Order Now Logic
         $order_date = date("Y-m-d");
 
         // Debugging: Print SQL query values
@@ -58,10 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $query = "INSERT INTO order_tbl (id, pt_id, quantity, order_date) VALUES (:id, :pt_id, :quantity, :order_date)";
         $stmt = $conn->prepare($query);
-        $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-        $stmt->bindParam(':pt_id', $product_id, PDO::PARAM_INT);
-        $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-        $stmt->bindParam(':order_date', $order_date, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $user_id);
+        $stmt->bindParam(':pt_id', $product_id);
+        $stmt->bindParam(':quantity', $quantity);
+        $stmt->bindParam(':order_date', $order_date);
         $stmt->execute();
     }
 }
