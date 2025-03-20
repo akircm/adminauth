@@ -135,7 +135,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </td>
                                 <td><img src="product/product_img/<?php echo htmlspecialchars($item['pt_img']); ?>" alt="Product"></td>
                                 <td><?php echo htmlspecialchars($item['pt_name']); ?></td>
-                                <td>$<?php echo number_format($item['pt_price'], 2); ?></td>
+                                <td>₱<?php echo number_format($item['pt_price'], 2); ?></td>
                                 <td>
                                     <form method="POST">
                                         <input type="hidden" name="cart_id" value="<?php echo $item['id']; ?>">
@@ -143,7 +143,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <button type="submit" name="update_cart" class="btn btn-sm update">Update</button>
                                     </form>
                                 </td>
-                                <td>$<?php echo number_format($subtotal, 2); ?></td>
+                                <td>₱<?php echo number_format($subtotal, 2); ?></td>
                                 <td>
                                     <form method="POST">
                                         <input type="hidden" name="cart_id" value="<?php echo $item['id']; ?>">
@@ -154,7 +154,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php endforeach; ?>
                         <tr>
                             <td colspan="5"><strong>Total:</strong></td>
-                            <td colspan="2"><strong>$<?php echo number_format($total_price, 2); ?></strong></td>
+                            <td colspan="2"><strong>₱<?php echo number_format($total_price, 2); ?></strong></td>
                         </tr>
                     </tbody>
                 </table>

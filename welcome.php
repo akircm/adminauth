@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="card-body text-center">
                             <h5 class="card-title"><?php echo htmlspecialchars($row['pt_name']); ?></h5>
                             <p class="card-text">Type: <?php echo htmlspecialchars($row['pt_type']); ?></p>
-                            <p class="card-text text-primary fw-bold">Price: $<?php echo htmlspecialchars($row['pt_price']); ?></p>
+                            <p class="card-text text-primary fw-bold">Price: ₱<?php echo htmlspecialchars($row['pt_price']); ?></p>
 
                             <form action="" method="POST" class="d-grid">
                                 <label class="form-label">Quantity</label>
