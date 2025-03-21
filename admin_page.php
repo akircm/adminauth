@@ -23,6 +23,7 @@ if (isset($_SESSION['user'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Page</title>
   <link rel="stylesheet" href="css/adminpage.css">
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 
@@ -47,10 +48,8 @@ if (isset($_SESSION['user'])) {
     <a href="products_page.php">Products</a>
     <a href="#">Analytics</a>
     <a href="admin_orders.php">View All Orders</a>
-
+    <a href="charts.php">View Charts</a>
   </div>
   
-  </div>
-
 </body>
 </html>

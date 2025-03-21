@@ -59,6 +59,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <a href="products_page.php">Products</a>
     <a href="#">Analytics</a>
     <a href="admin_orders.php">View All Orders</a>
+    <a href="charts.php">View Charts</a>
   </div>
 
   <!-- Main Content -->
