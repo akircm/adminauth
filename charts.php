@@ -2,28 +2,25 @@
 session_start();
 include ('database/db.php');
 
-// Fetch Product Categories Data
+// Product Categories Data
 $stmt1 = $conn->prepare("SELECT pt_type, COUNT(*) AS count FROM product_tbl GROUP BY pt_type");
 $stmt1->execute();
 $product_data = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch User Types Data
-// Updated query for User Types (Ignore empty or unknown roles)
+// User Types Data
 $stmt2 = $conn->prepare("SELECT role, COUNT(*) AS count FROM users GROUP BY role");
 $stmt2->execute();
 $user_data = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
-
-// Fetch Orders per User Data
+// Orders per User Data
 $stmt3 = $conn->prepare("SELECT id, COUNT(*) AS count FROM order_tbl GROUP BY id");
 $stmt3->execute();
 $order_data = $stmt3->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch Total Orders by Product Name
+// Total Orders by Product Name
 $stmt4 = $conn->prepare("SELECT pt_name, COUNT(order_tbl.pt_id) AS count FROM order_tbl INNER JOIN product_tbl ON order_tbl.pt_id = product_tbl.pt_id GROUP BY order_tbl.pt_id");
 $stmt4->execute();
 $product_orders_data = $stmt4->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +32,7 @@ $product_orders_data = $stmt4->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/productpage.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawCharts);
@@ -52,6 +50,7 @@ $product_orders_data = $stmt4->fetchAll(PDO::FETCH_ASSOC);
         var options1 = {
           title: 'Product Categories',
           is3D: true,
+          chartArea: { width: '80%', height: '70%' },
         };
         var chart1 = new google.visualization.PieChart(document.getElementById('product_chart'));
         chart1.draw(data1, options1);
@@ -68,6 +67,7 @@ $product_orders_data = $stmt4->fetchAll(PDO::FETCH_ASSOC);
         var options2 = {
           title: 'User Types',
           is3D: true,
+          chartArea: { width: '80%', height: '70%' },
         };
         var chart2 = new google.visualization.PieChart(document.getElementById('user_chart'));
         chart2.draw(data2, options2);
@@ -84,6 +84,7 @@ $product_orders_data = $stmt4->fetchAll(PDO::FETCH_ASSOC);
         var options3 = {
           title: 'Orders per User',
           is3D: true,
+          chartArea: { width: '80%', height: '70%' },
         };
         var chart3 = new google.visualization.PieChart(document.getElementById('order_chart'));
         chart3.draw(data3, options3);
@@ -100,13 +101,18 @@ $product_orders_data = $stmt4->fetchAll(PDO::FETCH_ASSOC);
         var options4 = {
           title: 'Total Orders by Product Name',
           is3D: true,
+          chartArea: { width: '80%', height: '70%' },
         };
         var chart4 = new google.visualization.PieChart(document.getElementById('product_orders_chart'));
         chart4.draw(data4, options4);
       }
+
+      // Redraw charts on window resize to ensure responsiveness
+      window.addEventListener('resize', drawCharts);
     </script>
 </head>
 <body>
+  <!-- Navbar -->
   <div class="navbar">
     <div class="nav-left">
       <a href="#">Dashboard</a>
@@ -119,6 +125,7 @@ $product_orders_data = $stmt4->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 
+  <!-- Sidebar -->
   <div class="sidebar">
     <a href="#">Home</a>
     <a href="#">Profile</a>
@@ -129,26 +136,42 @@ $product_orders_data = $stmt4->fetchAll(PDO::FETCH_ASSOC);
     <a href="charts.php">View Charts</a>
   </div>
 
+  <!-- Main Content -->
   <div class="main-content">
-    <h2 style="margin-top: 30px;">Dashboard Analytics</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <div id="product_chart" style="width: 100%; height: 400px;"></div>
+    <h2>Business Charts</h2>
+
+    <!-- First Row - 3 Charts -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="chart-wrapper">
+            <div id="product_chart" class="chart"></div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="chart-wrapper">
+            <div id="user_chart" class="chart"></div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="chart-wrapper">
+            <div id="order_chart" class="chart"></div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-6">
-        <div id="user_chart" style="width: 100%; height: 400px;"></div>
-      </div>
-    </div>
-    <div class="row" style="margin-top: 20px;">
-      <div class="col-md-6">
-        <div id="order_chart" style="width: 100%; height: 400px;"></div>
-      </div>
-      <div class="col-md-6">
-        <div id="product_orders_chart" style="width: 100%; height: 400px;"></div>
+
+      <!-- Second Row - Single Chart -->
+      <div class="row">
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="chart-wrapper">
+            <div id="product_orders_chart" class="chart"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
