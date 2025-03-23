@@ -46,9 +46,8 @@ if (isset($_SESSION['user'])) {
     <a href="#">Profile</a>
     <a href="#">Manage User</a>
     <a href="products_page.php">Products</a>
-    <a href="#">Analytics</a>
+    <a href="charts.php">Analytics</a>
     <a href="admin_orders.php">View All Orders</a>
-    <a href="charts.php">View Charts</a>
   </div>
   
 </body>

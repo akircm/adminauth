@@ -6,26 +6,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    
-    $stmt = $conn->prepare(query: "SELECT * FROM users WHERE username = :username AND password = :password");
-    $stmt->execute(params: ['username' => $username, 'password' => $password]);
+    // Prepare the query to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt->execute(['username' => $username]);
     $user = $stmt->fetch(); 
 
-    if ($user) {
+    // Check if the user exists and verify the password
+    if ($user && $password === $user['password']) {
         $_SESSION['logged_in'] = true;
         $_SESSION['user'] = $user;
- 
+
         $role = $user['role'];
- 
-        if($role === 'admin'){
-            header(header: 'Location: ../admin_page.php');
-        }else{
-            header(header: 'Location: ../welcome.php');
-        }exit;
+
+        // Redirect based on role
+        if ($role === 'admin') {
+            header('Location: ../admin_page.php');
+        } else {
+            header('Location: ../welcome.php');
+        }
+        exit;
+    } else {
+        // Redirect back to login with an error message
+        header('Location: ../index.php?error=Invalid username or password');
+        exit;
     }
-    
 } else {
-    header(header: 'Location: ../index.php'); 
+    header('Location: ../index.php'); 
     exit;
 }
 ?>

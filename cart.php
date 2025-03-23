@@ -60,9 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout_selected']))
     }
 }
 
-
-            
-
 // Fetch Cart Items
 $query = "
     SELECT cart.id, product_tbl.pt_name, product_tbl.pt_price, cart.quantity, product_tbl.pt_img 
@@ -111,7 +108,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2 class="text-center">My Cart</h2>
 
         <?php if (count($cart_items) > 0): ?>
-            <form method="POST">
+            <form method="POST" id="cartForm">
                 <table class="table cart-table">
                     <thead>
                         <tr>
@@ -128,10 +125,9 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php $total_price = 0; ?>
                         <?php foreach ($cart_items as $item): ?>
                             <?php $subtotal = $item['pt_price'] * $item['quantity']; ?>
-                            <?php $total_price += $subtotal; ?>
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="selected_products[]" value="<?php echo $item['id']; ?>">
+                                    <input type="checkbox" name="selected_products[]" value="<?php echo $item['id']; ?>" class="product-checkbox">
                                 </td>
                                 <td><img src="product/product_img/<?php echo htmlspecialchars($item['pt_img']); ?>" alt="Product"></td>
                                 <td><?php echo htmlspecialchars($item['pt_name']); ?></td>
@@ -152,9 +148,10 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-                        <tr>
+                        <!-- Show Total Only If Any Product is Selected -->
+                        <tr id="totalRow" style="display: none;">
                             <td colspan="5"><strong>Total:</strong></td>
-                            <td colspan="2"><strong>₱<?php echo number_format($total_price, 2); ?></strong></td>
+                            <td colspan="2"><strong id="totalAmount">₱0.00</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -173,6 +170,36 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="welcome.php" class="btn btn-primary">Continue Shopping</a>
         </div>
     </div>
+
+    <!-- JavaScript to Handle Total Calculation -->
+    <script>
+        const checkboxes = document.querySelectorAll('.product-checkbox');
+        const totalRow = document.getElementById('totalRow');
+        const totalAmount = document.getElementById('totalAmount');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', calculateTotal);
+        });
+
+        function calculateTotal() {
+            let total = 0;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const row = checkbox.closest('tr');
+                    const price = parseFloat(row.querySelector('td:nth-child(6)').innerText.replace('₱', '').replace(',', ''));
+                    total += price;
+                }
+            });
+
+            if (total > 0) {
+                totalRow.style.display = 'table-row';
+                totalAmount.innerText = '₱' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            } else {
+                totalRow.style.display = 'none';
+                totalAmount.innerText = '₱0.00';
+            }
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

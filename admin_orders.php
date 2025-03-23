@@ -29,127 +29,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Orders (Admin)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/productpage.css">
-    <style>
-        /* Global styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-        }
-
-        /* Navbar styles */
-        .navbar {
-            background-color: #333;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-right: 15px;
-            padding: 8px 12px;
-            transition: background-color 0.3s ease;
-        }
-
-        .navbar a:hover {
-            background-color: #575757;
-            border-radius: 4px;
-        }
-
-        .navbar .btn-logout {
-            background-color: #f44336;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 12px;
-            cursor: pointer;
-        }
-
-        .navbar .btn-logout:hover {
-            background-color: #e53935;
-        }
-
-        /* Sidebar styles */
-        .sidebar {
-            position: fixed;
-            top: 60px;
-            left: 0;
-            width: 200px;
-            height: calc(100% - 60px);
-            background-color: #444;
-            padding-top: 20px;
-        }
-
-        .sidebar a {
-            display: block;
-            color: white;
-            padding: 12px 20px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .sidebar a:hover {
-            background-color: #575757;
-        }
-
-        /* Main content */
-        .main-content {
-            margin-top: 60px; /* Avoid overlap with navbar */
-            margin-left: 210px; /* Avoid sidebar */
-            padding: 20px;
-        }
-
-        /* Table styles */
-        .table-responsive {
-            margin-top: 30px;
-        }
-
-        .order-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .order-table th,
-        .order-table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        .order-table th {
-            background-color: #333;
-            color: white;
-        }
-
-        .order-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .order-table tr:hover {
-            background-color: #ddd;
-        }
-
-        /* Image styles */
-        .order-table img {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/adminorders.css">
 </head>
 
 <body>
@@ -171,9 +51,8 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <a href="admin_page.php?page=profile">Profile</a>
     <a href="admin_page.php?page=manage_users">Manage Users</a>
     <a href="products_page.php">Products</a>
-    <a href="admin_page.php?page=analytics">Analytics</a>
+    <a href="charts.php">Analytics</a>
     <a href="admin_orders.php">View All Orders</a>
-    <a href="charts.php">View Charts</a>
 </div>
 
 <!-- Main Content -->

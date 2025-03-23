@@ -57,9 +57,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <a href="#">Profile</a>
     <a href="#">Manage User</a>
     <a href="products_page.php">Products</a>
-    <a href="#">Analytics</a>
+    <a href="charts.php">Analytics</a>
     <a href="admin_orders.php">View All Orders</a>
-    <a href="charts.php">View Charts</a>
   </div>
 
   <!-- Main Content -->
@@ -124,7 +123,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
         <td><?php echo $row['pt_name']; ?></td>
         <td><?php echo $row['pt_type']; ?></td>
-        <td><?php echo $row['pt_price']; ?></td>
+        <td>₱<?php echo number_format($row['pt_price'], 2); ?></td>
         <td><img style="height:30px" src="product/product_img/<?php echo $row['pt_img']; ?>" alt=""></td>
         <td>
             <!-- Edit Button (Triggers Modal) -->
