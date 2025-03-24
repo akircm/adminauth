@@ -1,142 +1,136 @@
-/* =============================
-   Global Styles
-   ============================= */
-* {
+/* General styles */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-}
-
-/* =============================
-   Navbar Styles
-   ============================= */
+/* Navbar styles */
 .navbar {
     background-color: #333;
-    color: white;
-    padding: 15px 20px;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: st;
-    top: 0;
-    width: 100%;
-    height: 60px;
-    z-index: 1000;
 }
 
-/* Navbar links */
 .navbar a {
-    color: white;
+    color: #fff;
     text-decoration: none;
     margin-right: 15px;
-    padding: 8px 12px;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    transition: color 0.3s;
 }
 
 .navbar a:hover {
-    background-color: #575757;
-    border-radius: 5px;
+    color: #d1c4e9;
 }
 
-/* Logout button */
-.navbar .btn-logout {
-    background-color: #f44336;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+.username {
+    color: #f3e5f5;
+    font-size: 16px;
+    margin-right: 15px;
 }
 
-.navbar .btn-logout:hover {
-    background-color: #e53935;
-}
-
-/* =============================
-   Sidebar Styles
-   ============================= */
-.sidebar {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 200px;
-    height: calc(100% - 60px);
-    background-color: #444;
-    padding-top: 20px;
-    overflow-y: auto;
-}
-
-/* Sidebar links */
-.sidebar a {
-    display: block;
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.sidebar a:hover {
-    background-color: #575757;
-}
-
-/* =============================
-   Main Content
-   ============================= */
-.main-content {
-    margin-top: 60px; /* Prevent overlap with navbar */
-    margin-left: 210px; /* Prevent overlap with sidebar */
-    padding: 20px;
+/* Container styles */
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
     background-color: #fff;
-    min-height: 100vh;
-}
-
-h2 {
-    color: #333;
-}
-
-/* Chart Wrapper */
-.chart-wrapper {
-    background: white;
     padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+h2 {
+    color: #000000;
+    font-size: 30px; /* Bigger size */
+    font-weight: 700; /* Bold text */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Table styles */
+.order-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.order-table thead th {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+}
+
+.order-table tbody tr {
+    background-color: #f8f9fa;
     text-align: center;
 }
 
-.chart {
-    width: 100%;
-    height: 300px;
+.order-table tbody tr:nth-child(even) {
+    background-color: #eceff1;
 }
 
-/* =============================
-   Responsive Styles
-   ============================= */
+.order-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+/* Product image styles */
+img.img-fluid {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* No orders message */
+.text-center {
+    color: #6c757d;
+    font-size: 16px;
+}
+
+/* Logout button */
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
-    .main-content {
-        margin-left: 0;
-        margin-top: 100px;
-    }
-
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
     .navbar {
         flex-direction: column;
-        align-items: flex-start;
+        text-align: center;
     }
 
-    .navbar a {
-        margin-top: 5px;
-        margin-bottom: 5px;
+    .navbar a, .username {
+        margin-top: 10px;
+    }
+
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .order-table td, .order-table th {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    img.img-fluid {
+        width: 50px;
+        height: 50px;
     }
 }

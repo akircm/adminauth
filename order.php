@@ -31,7 +31,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/order.css">
+    <link rel="stylesheet" href="css/order.css">
 
     
 </head>
@@ -43,7 +43,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">My Orders</h2>
+    <h2 style="color:rgbfont-size: 30px; font-weight: 700; text-align: center;">My Orders</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-hover order-table">
             <thead class="table-dark">
